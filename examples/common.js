@@ -188,7 +188,11 @@
 	    if (this.props.focusOnUpDown && this.state.focused && document.activeElement !== this.refs.input) {
 	      this.focus();
 	    }
-	    this.refs.input.setSelectionRange(this.start, this.end);
+	
+	    var selectionRange = this.refs.input.setSelectionRange;
+	    if (selectionRange && typeof selectionRange === 'function') {
+	      this.refs.input.setSelectionRange(this.start, this.end);
+	    }
 	  },
 	  onKeyDown: function onKeyDown(e) {
 	    if (e.keyCode === 38) {
